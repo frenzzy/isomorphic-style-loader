@@ -9,18 +9,18 @@
 
 import React, { Component, PropTypes } from 'react';
 
-function getDisplayName(ComposedComponent) {
-  return ComposedComponent.displayName || ComposedComponent.name || 'Component';
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
 function withStyles(...styles) {
-  return (ComposedComponent) => class WithStyles extends Component {
+  return (WrappedComponent) => class WithStyles extends Component {
     static contextTypes = {
       insertCss: PropTypes.func.isRequired,
     };
 
-    static displayName = `WithStyles(${getDisplayName(ComposedComponent)})`;
-    static ComposedComponent = ComposedComponent;
+    static displayName = `WithStyles(${getDisplayName(WrappedComponent)})`;
+    static WrappedComponent = WrappedComponent;
 
     componentWillMount() {
       this.removeCss = this.context.insertCss.apply(undefined, styles);
@@ -30,12 +30,12 @@ function withStyles(...styles) {
       setTimeout(this.removeCss, 0);
     }
 
-    getComposedInstance() {
-      return this.refs.composedInstance;
+    getWrappedInstance() {
+      return this.refs.wrappedInstance;
     }
 
     render() {
-      return <ComposedComponent ref="composedInstance" {...this.props} />;
+      return <WrappedComponent ref="wrappedInstance" {...this.props} />;
     }
   };
 }

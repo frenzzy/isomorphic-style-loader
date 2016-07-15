@@ -15,7 +15,7 @@ import React, { createClass, Component, PropTypes } from 'react';
 import TestUtils from 'react-addons-test-utils';
 import withStyles from '../src/withStyles';
 
-describe('withStyles(...styles)(ComposedComponent)', () => {
+describe('withStyles(...styles)(WrappedComponent)', () => {
   class Provider extends Component {
     static childContextTypes = {
       insertCss: PropTypes.func.isRequired,
@@ -61,7 +61,7 @@ describe('withStyles(...styles)(ComposedComponent)', () => {
     ).displayName).to.equal('WithStyles(Component)');
   });
 
-  it('Should expose the component with styles as ComposedComponent', () => {
+  it('Should expose the component with styles as WrappedComponent', () => {
     class Container extends Component {
       render() {
         return <Passthrough />;
@@ -69,10 +69,10 @@ describe('withStyles(...styles)(ComposedComponent)', () => {
     }
 
     const Decorated = withStyles('')(Container);
-    expect(Decorated.ComposedComponent).to.equal(Container);
+    expect(Decorated.WrappedComponent).to.equal(Container);
   });
 
-  it('Should return the instance of the composed component for use in calling child methods', () => {
+  it('Should return the instance of the wrapped component for use in calling child methods', () => {
     const someData = { some: 'data' };
 
     class Container extends Component {
@@ -96,7 +96,7 @@ describe('withStyles(...styles)(ComposedComponent)', () => {
     const decorated = TestUtils.findRenderedComponentWithType(tree, Decorated);
 
     expect(() => decorated.someInstanceMethod()).to.throw(Error);
-    expect(decorated.getComposedInstance().someInstanceMethod()).to.equal(someData);
-    expect(decorated.refs.composedInstance.someInstanceMethod()).to.equal(someData);
+    expect(decorated.getWrappedInstance().someInstanceMethod()).to.equal(someData);
+    expect(decorated.refs.wrappedInstance.someInstanceMethod()).to.equal(someData);
   });
 });
