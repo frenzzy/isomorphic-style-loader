@@ -1,8 +1,8 @@
 {
-  "name": "isomorphic-style-loader",
+  "name": "horyd-isomorphic-style-loader",
   "version": "1.0.0",
   "description": "Isomorphic CSS style loader for Webpack",
-  "repository": "kriasoft/isomorphic-style-loader",
+  "repository": "horyd/isomorphic-style-loader",
   "author": "Kriasoft <support@kriasoft.com> (http://www.kriasoft.com)",
   "contributors": [
     "Konstantin Tarkus <hello@tarkus.me>",

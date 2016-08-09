@@ -30,8 +30,17 @@ function withStyles(...styles) {
       setTimeout(this.removeCss, 0);
     }
 
-    getWrappedInstance() {
-      return this.refs.wrappedInstance;
+    getWrappedInstance(...rest) {
+      const levelsOfWrapping = rest.length <= 0
+        || rest[0] === undefined ?
+        1 :
+        rest[0];
+      let wrappedInstance = this.refs.wrappedInstance;
+      let i = levelsOfWrapping;
+      for (i; i--; i > 1) {
+        wrappedInstance = wrappedInstance.getWrappedInstance(i - 1);
+      }
+      return wrappedInstance;
     }
 
     render() {
