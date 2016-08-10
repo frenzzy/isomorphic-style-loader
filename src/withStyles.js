@@ -37,7 +37,7 @@ function withStyles(...styles) {
         rest[0];
       let wrappedInstance = this.refs.wrappedInstance;
       let i = levelsOfWrapping;
-      for (i; i--; i > 1) {
+      for (i; i > 1; i--) {
         wrappedInstance = wrappedInstance.getWrappedInstance(i - 1);
       }
       return wrappedInstance;
